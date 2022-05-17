@@ -7,8 +7,18 @@ const appReducer = (state, action) => {
     case "CONTINUE":
       return { ...state, isUser: action.payload };
     case "PERSISTENT_DATA":
-      console.log("persist", action);
       return { isUser: action.payload.isUser, name: action.payload.user };
+    case "SET_TIME":
+      return {
+        ...state,
+        time: {
+          ...state.time,
+          hour: action.payload.hour,
+          minute: action.payload.minute,
+        },
+      };
+    case "SET_GREET":
+      return { ...state, greet:action.payload };
     default:
       return { ...state };
   }
@@ -17,11 +27,12 @@ const appReducer = (state, action) => {
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [{ isUser, name }, dispatch] = useReducer(appReducer, {
+  const [{ isUser, name, time, greet }, dispatch] = useReducer(appReducer, {
     isUser: false,
     name: "",
+    time: { hour: "00", minute: "00" },
+    greet:''
   });
-
   useEffect(() => {
     if (localStorage.getItem("isUser") === null) {
       return;
@@ -35,7 +46,7 @@ const AppProvider = ({ children }) => {
   return (
     <>
       {" "}
-      <AppContext.Provider value={{ isUser, name, dispatch }}>
+      <AppContext.Provider value={{ isUser, name, time, greet, dispatch }}>
         {children}
       </AppContext.Provider>{" "}
     </>
