@@ -11,13 +11,14 @@ export const UserOnboarding = () => {
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       let today = new Date();
-      let [hour, minute] = today.toLocaleTimeString().split(":");
+      let hour = today.getHours();
 
       if (hour >= 12) {
         dispatch({ type: "SET_GREET", payload: "Good Afternoon" });
         if (hour > 16) {
           dispatch({ type: "SET_GREET", payload: "Good Evening" });
         }
+        // hour = hour - 12;
         if (hour < 10) {
           hour = "0" + hour;
         }
@@ -27,6 +28,7 @@ export const UserOnboarding = () => {
         dispatch({ type: "SET_GREET", payload: "Good Morning" });
       }
 
+      let minute = today.getMinutes();
       if (minute < 10) minute = "0" + minute;
       dispatch({ type: "SET_TIME", payload: { hour, minute } });
     }, 1000);
