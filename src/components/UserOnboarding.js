@@ -82,6 +82,7 @@ export const UserOnboarding = () => {
 
 useEffect(() => {
 setQuote( quoteDb[Math.floor(Math.random() * quoteDb.length )]);
+
 },[])
 
   return (
@@ -129,11 +130,8 @@ setQuote( quoteDb[Math.floor(Math.random() * quoteDb.length )]);
           onKeyPress={mainTaskHandler}
         />
       )}
-      <p className="text-l font-black text-black capitalize mt-3">
-  
-        {console.log(Math.ceil(Math.random() * quoteDb.length))}
-        {quote}
-      </p>
+      <p className="text-l font-black text-black capitalize mt-3">{quote}</p>
+      {/* <img src='../db/imageDb/image1' alt="" /> */}
     </div>
   );
 };

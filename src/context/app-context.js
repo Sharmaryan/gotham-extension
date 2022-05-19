@@ -30,19 +30,19 @@ const appReducer = (state, action) => {
         ...state,
         mainTask: "",
         isMainTaskAdded: action.payload.isAdded,
-        isTaskCompleted: action.payload.value
+        isTaskCompleted: action.payload.value,
       };
     case "MAIN_TASK_EDIT":
-        return {
-          ...state,
-          mainTask: action.payload.value,
-          isMainTaskAdded: action.payload.isAdded,
-        };
+      return {
+        ...state,
+        mainTask: action.payload.value,
+        isMainTaskAdded: action.payload.isAdded,
+      };
     case "IS_TASK_COMPLETED":
-        return {
-          ...state,
-         isTaskCompleted: action.payload,
-        };
+      return {
+        ...state,
+        isTaskCompleted: action.payload,
+      };
 
     default:
       return { ...state };
@@ -52,16 +52,18 @@ const appReducer = (state, action) => {
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [{ isUser, name, time, greet, mainTask, isMainTaskAdded, isTaskCompleted }, dispatch] =
-    useReducer(appReducer, {
-      isUser: false,
-      name: "",
-      time: { hour: "00", minute: "00" },
-      greet: "",
-      mainTask: "",
-      isMainTaskAdded: false,
-      isTaskCompleted: false
-    });
+  const [
+    { isUser, name, time, greet, mainTask, isMainTaskAdded, isTaskCompleted },
+    dispatch,
+  ] = useReducer(appReducer, {
+    isUser: false,
+    name: "",
+    time: { hour: "00", minute: "00" },
+    greet: "",
+    mainTask: "",
+    isMainTaskAdded: false,
+    isTaskCompleted: false,
+  });
   useEffect(() => {
     if (localStorage.getItem("isUser") === null) {
       return;
