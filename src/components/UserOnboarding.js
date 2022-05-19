@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useApp } from "../context/app-context";
 import { quoteDb } from "../db/quoteDb";
@@ -85,16 +86,25 @@ setQuote( quoteDb[Math.floor(Math.random() * quoteDb.length )]);
 
 },[])
 
+// useEffect(() => {
+//   (async () => {
+// const response = await axios.get(
+//   "http://api.weatherapi.com/v1/current.json?key=0592f3391efe4192a7893027221905&q=delhi&aqi=no"
+// );
+// console.log(response.data.current.feelslike_c);
+//   })();
+// },[])
+
   return (
     <div className="h-full flex justify-center items-center  flex-col ">
-      <h1 className="text-8xl font-black text-black capitalize tracking-wider">
+      <h1 className="text-8xl font-black text-white capitalize tracking-wider">
         {time?.hour}:{time?.minute}
       </h1>
-      <h2 className="text-4xl font-extrabold text-black capitalize tracking-wider mt-3">
+      <h2 className="text-4xl font-extrabold text-white capitalize tracking-wider mt-3">
         {greet}, {name}
       </h2>
       {isMainTaskAdded ?? (
-        <p className="text-3xl font-black text-black capitalize mt-3">
+        <p className="text-3xl font-black text-white capitalize mt-3">
           what is your main focus today?
         </p>
       )}
@@ -108,30 +118,29 @@ setQuote( quoteDb[Math.floor(Math.random() * quoteDb.length )]);
             className="mx-3 "
           />{" "}
           <p
-            className={`text-3xl font-black text-black capitalize mt-3 ${
+            className={`text-3xl font-black text-white capitalize mt-3 ${
               isTaskCompleted ? `line-through` : `no-underline`
             }`}
           >
             {mainTask}
           </p>
           <i
-            class="fa fa-edit text-2xl font-black text-black capitalize ml-3 mt-3"
+            class="fa fa-edit text-2xl font-black font-light text-white capitalize ml-3 mt-3"
             onClick={editTask}
           ></i>
           <i
-            class="fa fa-trash-o text-2xl font-black text-black capitalize ml-3 mt-3"
+            class="fa fa-trash-o text-2xl font-light font-black text-white capitalize ml-3 mt-3"
             onClick={deleteTask}
           ></i>
         </label>
       ) : (
         <input
           type="text"
-          className=" outline-none bg-transparent border-b-2 border-white-500 w-80 text-black text-2xl font-bold mt-1.5"
+          className=" outline-none bg-transparent border-b-2 border-white-500 w-80 text-white text-2xl font-bold mt-1.5"
           onKeyPress={mainTaskHandler}
         />
       )}
-      <p className="text-l font-black text-black capitalize mt-3">{quote}</p>
-      {/* <img src='../db/imageDb/image1' alt="" /> */}
+      <p className="text-l font-black text-white capitalize mt-3">"{quote}"</p>
     </div>
   );
 };

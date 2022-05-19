@@ -4,6 +4,10 @@ const appReducer = (state, action) => {
   switch (action.type) {
     case "USER_NAME":
       return { ...state, name: action.payload };
+    case "USER_CITY":
+      return { ...state, city: action.payload };
+    case "NEXT":
+      return { ...state, isUserNameAdded: action.payload };
     case "CONTINUE":
       return { ...state, isUser: action.payload };
     case "PERSISTENT_DATA":
@@ -53,7 +57,17 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [
-    { isUser, name, time, greet, mainTask, isMainTaskAdded, isTaskCompleted },
+    {
+      isUser,
+      name,
+      time,
+      greet,
+      mainTask,
+      isMainTaskAdded,
+      isTaskCompleted,
+      city,
+      isUserNameAdded,
+    },
     dispatch,
   ] = useReducer(appReducer, {
     isUser: false,
@@ -63,6 +77,8 @@ const AppProvider = ({ children }) => {
     mainTask: "",
     isMainTaskAdded: false,
     isTaskCompleted: false,
+    city: "",
+    isUserNameAdded: false,
   });
   useEffect(() => {
     if (localStorage.getItem("isUser") === null) {
@@ -86,6 +102,8 @@ const AppProvider = ({ children }) => {
           mainTask,
           isMainTaskAdded,
           isTaskCompleted,
+          city,
+          isUserNameAdded,
           dispatch,
         }}
       >
