@@ -20,8 +20,30 @@ const appReducer = (state, action) => {
     case "SET_GREET":
       return { ...state, greet: action.payload };
     case "TASK_NAME":
-      return { ...state, mainTask: action.payload.value, isMainTaskAdded: action.payload.isAdded 
+      return {
+        ...state,
+        mainTask: action.payload.value,
+        isMainTaskAdded: action.payload.isAdded,
       };
+    case "MAIN_TASK_DELETE":
+      return {
+        ...state,
+        mainTask: "",
+        isMainTaskAdded: action.payload.isAdded,
+        isTaskCompleted: action.payload.value
+      };
+    case "MAIN_TASK_EDIT":
+        return {
+          ...state,
+          mainTask: action.payload.value,
+          isMainTaskAdded: action.payload.isAdded,
+        };
+    case "IS_TASK_COMPLETED":
+        return {
+          ...state,
+         isTaskCompleted: action.payload,
+        };
+
     default:
       return { ...state };
   }
@@ -30,17 +52,16 @@ const appReducer = (state, action) => {
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [{ isUser, name, time, greet, mainTask, isMainTaskAdded }, dispatch] = useReducer(
-    appReducer,
-    {
+  const [{ isUser, name, time, greet, mainTask, isMainTaskAdded, isTaskCompleted }, dispatch] =
+    useReducer(appReducer, {
       isUser: false,
       name: "",
       time: { hour: "00", minute: "00" },
       greet: "",
       mainTask: "",
-      isMainTaskAdded:false
-    }
-  );
+      isMainTaskAdded: false,
+      isTaskCompleted: false
+    });
   useEffect(() => {
     if (localStorage.getItem("isUser") === null) {
       return;
@@ -55,7 +76,16 @@ const AppProvider = ({ children }) => {
     <>
       {" "}
       <AppContext.Provider
-        value={{ isUser, name, time, greet, mainTask, isMainTaskAdded, dispatch }}
+        value={{
+          isUser,
+          name,
+          time,
+          greet,
+          mainTask,
+          isMainTaskAdded,
+          isTaskCompleted,
+          dispatch,
+        }}
       >
         {children}
       </AppContext.Provider>{" "}

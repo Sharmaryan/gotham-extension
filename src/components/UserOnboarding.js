@@ -2,7 +2,15 @@ import React, { useEffect, useRef } from "react";
 import { useApp } from "../context/app-context";
 
 export const UserOnboarding = () => {
-  const { name, dispatch, time, greet, mainTask, isMainTaskAdded } = useApp();
+  const {
+    name,
+    dispatch,
+    time,
+    greet,
+    mainTask,
+    isMainTaskAdded,
+    isTaskCompleted,
+  } = useApp();
   let intervalRef = useRef();
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(name));
@@ -42,6 +50,33 @@ export const UserOnboarding = () => {
     }
   };
 
+  const changeHandler = (e) => {
+    if (e.target.checked) {
+      dispatch({
+        type: "IS_TASK_COMPLETED",
+        payload: true,
+      });
+    } else {
+      dispatch({
+        type: "IS_TASK_COMPLETED",
+        payload: false,
+      });
+    }
+  };
+
+  const editTask = () => {
+    dispatch({
+      type: "MAIN_TASK_EDIT",
+      payload: { value: mainTask, isAdded: false },
+    });
+  };
+  const deleteTask = () => {
+    dispatch({
+      type: "MAIN_TASK_DELETE",
+      payload: { value: false, isAdded: false },
+    });
+  };
+
   return (
     <div className="h-full flex justify-center items-center  flex-col ">
       <h1 className="text-8xl font-black text-black capitalize tracking-wider">
@@ -57,16 +92,35 @@ export const UserOnboarding = () => {
       )}
 
       {isMainTaskAdded ? (
-        <p className="text-3xl font-black text-black capitalize mt-3">
-          <label htmlFor="task">
-            <input type="checkbox" htmlFor="task" /> {mainTask}
-          </label>
-        </p>
+        <label htmlFor="task" className="flex items-center ">
+          <input
+            type="checkbox"
+            htmlFor="task"
+            onChange={changeHandler}
+            className="mx-3 "
+          />{" "}
+          <p
+            className={`text-3xl font-black text-black capitalize mt-3 ${
+              isTaskCompleted ? `line-through` : `no-underline`
+            }`}
+          >
+            {mainTask}
+          </p>
+          <i
+            class="fa fa-edit text-2xl font-black text-black capitalize ml-3 mt-3"
+            onClick={editTask}
+          ></i>
+          <i
+            class="fa fa-trash-o text-2xl font-black text-black capitalize ml-3 mt-3"
+            onClick={deleteTask}
+          ></i>
+        </label>
       ) : (
         <input
           type="text"
           className=" outline-none bg-transparent border-b-2 border-white-500 w-80 text-black text-2xl font-bold mt-1.5"
           onKeyPress={mainTaskHandler}
+          // value={mainTask }
         />
       )}
     </div>
