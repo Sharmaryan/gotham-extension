@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useApp } from "../context/app-context";
-
+import { quoteDb } from "../db/quoteDb";
 export const UserOnboarding = () => {
   const {
     name,
@@ -12,6 +12,9 @@ export const UserOnboarding = () => {
     isTaskCompleted,
   } = useApp();
   let intervalRef = useRef();
+
+  const [quote, setQuote] = useState();
+
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(name));
   }, [name]);
@@ -77,6 +80,10 @@ export const UserOnboarding = () => {
     });
   };
 
+useEffect(() => {
+setQuote( quoteDb[Math.floor(Math.random() * quoteDb.length )]);
+},[])
+
   return (
     <div className="h-full flex justify-center items-center  flex-col ">
       <h1 className="text-8xl font-black text-black capitalize tracking-wider">
@@ -120,9 +127,13 @@ export const UserOnboarding = () => {
           type="text"
           className=" outline-none bg-transparent border-b-2 border-white-500 w-80 text-black text-2xl font-bold mt-1.5"
           onKeyPress={mainTaskHandler}
-          // value={mainTask }
         />
       )}
+      <p className="text-l font-black text-black capitalize mt-3">
+  
+        {console.log(Math.ceil(Math.random() * quoteDb.length))}
+        {quote}
+      </p>
     </div>
   );
 };
