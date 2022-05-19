@@ -18,7 +18,10 @@ const appReducer = (state, action) => {
         },
       };
     case "SET_GREET":
-      return { ...state, greet:action.payload };
+      return { ...state, greet: action.payload };
+    case "TASK_NAME":
+      return { ...state, mainTask: action.payload.value, isMainTaskAdded: action.payload.isAdded 
+      };
     default:
       return { ...state };
   }
@@ -27,12 +30,17 @@ const appReducer = (state, action) => {
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [{ isUser, name, time, greet }, dispatch] = useReducer(appReducer, {
-    isUser: false,
-    name: "",
-    time: { hour: "00", minute: "00" },
-    greet:''
-  });
+  const [{ isUser, name, time, greet, mainTask, isMainTaskAdded }, dispatch] = useReducer(
+    appReducer,
+    {
+      isUser: false,
+      name: "",
+      time: { hour: "00", minute: "00" },
+      greet: "",
+      mainTask: "",
+      isMainTaskAdded:false
+    }
+  );
   useEffect(() => {
     if (localStorage.getItem("isUser") === null) {
       return;
@@ -46,7 +54,9 @@ const AppProvider = ({ children }) => {
   return (
     <>
       {" "}
-      <AppContext.Provider value={{ isUser, name, time, greet, dispatch }}>
+      <AppContext.Provider
+        value={{ isUser, name, time, greet, mainTask, isMainTaskAdded, dispatch }}
+      >
         {children}
       </AppContext.Provider>{" "}
     </>
