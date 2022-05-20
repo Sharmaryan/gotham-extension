@@ -22,7 +22,7 @@ export const Weather = () => {
   return (
     <div className="absolute right-3 top-3 text-2xl font-extrabold text-white lowercase">
       <div>
-        {weather?.temperature}° <span className=" text-xl">{city}</span>
+        {weather?.temperature}° <span className=" text-xl capitalize">{city}</span>
       </div>
       <img src={weather?.icon} alt="weather" className="h3" />
     </div>
