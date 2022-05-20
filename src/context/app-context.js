@@ -11,7 +11,12 @@ const appReducer = (state, action) => {
     case "CONTINUE":
       return { ...state, isUser: action.payload };
     case "PERSISTENT_DATA":
-      return { isUser: action.payload.isUser, name: action.payload.user };
+      return {
+        isUser: action.payload.isUser,
+        name: action.payload.user,
+        mainTask: action.payload.mainTaskName,
+        isMainTaskAdded: action.payload.isMainTaskAdded,
+      };
     case "SET_TIME":
       return {
         ...state,
@@ -35,6 +40,7 @@ const appReducer = (state, action) => {
         mainTask: "",
         isMainTaskAdded: action.payload.isAdded,
         isTaskCompleted: action.payload.value,
+        taskName:''
       };
     case "MAIN_TASK_EDIT":
       return {
@@ -42,6 +48,8 @@ const appReducer = (state, action) => {
         mainTask: action.payload.value,
         isMainTaskAdded: action.payload.isAdded,
       };
+    case "MAIN_TASK":
+      return { ...state, taskName: action.payload };
     case "IS_TASK_COMPLETED":
       return {
         ...state,
@@ -67,6 +75,7 @@ const AppProvider = ({ children }) => {
       isTaskCompleted,
       city,
       isUserNameAdded,
+      taskName,
     },
     dispatch,
   ] = useReducer(appReducer, {
@@ -79,14 +88,25 @@ const AppProvider = ({ children }) => {
     isTaskCompleted: false,
     city: "",
     isUserNameAdded: false,
+    taskName: "",
   });
   useEffect(() => {
     if (localStorage.getItem("isUser") === null) {
       return;
     } else {
-      const data = JSON.parse(localStorage.getItem("isUser") ?? "");
-      const user = JSON.parse(localStorage.getItem("user") ?? "");
-      dispatch({ type: "PERSISTENT_DATA", payload: { isUser: data, user } });
+      const data = JSON.parse(localStorage.getItem("isUser"));
+      const user = JSON.parse(localStorage.getItem("user"));
+      const mainTaskName = JSON.parse(localStorage.getItem("mainTask"));
+      const isTaskAddedIn = JSON.parse(localStorage.getItem("isMainTaskAdded"));
+      dispatch({
+        type: "PERSISTENT_DATA",
+        payload: {
+          isUser: data,
+          user,
+          mainTaskName,
+          isMainTaskAdded: isTaskAddedIn,
+        },
+      });
     }
   }, []);
 
@@ -104,6 +124,7 @@ const AppProvider = ({ children }) => {
           isTaskCompleted,
           city,
           isUserNameAdded,
+          taskName,
           dispatch,
         }}
       >
