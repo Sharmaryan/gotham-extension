@@ -1,68 +1,7 @@
 import { useContext, createContext, useReducer, useEffect } from "react";
-
-const appReducer = (state, action) => {
-  switch (action.type) {
-    case "USER_NAME":
-      return { ...state, name: action.payload };
-    case "USER_CITY":
-      return { ...state, city: action.payload };
-    case "NEXT":
-      return { ...state, isUserNameAdded: action.payload };
-    case "CONTINUE":
-      return { ...state, isUser: action.payload };
-    case "PERSISTENT_DATA":
-      return {
-        isUser: action.payload.isUser,
-        name: action.payload.user,
-        mainTask: action.payload.mainTaskName,
-        isMainTaskAdded: action.payload.isMainTaskAdded,
-      };
-    case "SET_TIME":
-      return {
-        ...state,
-        time: {
-          ...state.time,
-          hour: action.payload.hour,
-          minute: action.payload.minute,
-        },
-      };
-    case "SET_GREET":
-      return { ...state, greet: action.payload };
-    case "TASK_NAME":
-      return {
-        ...state,
-        mainTask: action.payload.value,
-        isMainTaskAdded: action.payload.isAdded,
-      };
-    case "MAIN_TASK_DELETE":
-      return {
-        ...state,
-        mainTask: "",
-        isMainTaskAdded: action.payload.isAdded,
-        isTaskCompleted: action.payload.value,
-        taskName:''
-      };
-    case "MAIN_TASK_EDIT":
-      return {
-        ...state,
-        mainTask: action.payload.value,
-        isMainTaskAdded: action.payload.isAdded,
-      };
-    case "MAIN_TASK":
-      return { ...state, taskName: action.payload };
-    case "IS_TASK_COMPLETED":
-      return {
-        ...state,
-        isTaskCompleted: action.payload,
-      };
-
-    default:
-      return { ...state };
-  }
-};
+import { appReducer } from "../reducer/appReducer";
 
 const AppContext = createContext();
-
 const AppProvider = ({ children }) => {
   const [
     {
@@ -76,6 +15,8 @@ const AppProvider = ({ children }) => {
       city,
       isUserNameAdded,
       taskName,
+      weather,
+      quote
     },
     dispatch,
   ] = useReducer(appReducer, {
@@ -89,7 +30,10 @@ const AppProvider = ({ children }) => {
     city: "",
     isUserNameAdded: false,
     taskName: "",
+    weather: { temperature:'', icon:''},
+    quote:''
   });
+
   useEffect(() => {
     if (localStorage.getItem("isUser") === null) {
       return;
@@ -98,13 +42,15 @@ const AppProvider = ({ children }) => {
       const user = JSON.parse(localStorage.getItem("user"));
       const mainTaskName = JSON.parse(localStorage.getItem("mainTask"));
       const isTaskAddedIn = JSON.parse(localStorage.getItem("isMainTaskAdded"));
+      const city = JSON.parse(localStorage.getItem("city"));
       dispatch({
         type: "PERSISTENT_DATA",
         payload: {
           isUser: data,
-          user,
+          user, 
           mainTaskName,
           isMainTaskAdded: isTaskAddedIn,
+          city
         },
       });
     }
@@ -112,7 +58,6 @@ const AppProvider = ({ children }) => {
 
   return (
     <>
-      {" "}
       <AppContext.Provider
         value={{
           isUser,
@@ -125,6 +70,8 @@ const AppProvider = ({ children }) => {
           city,
           isUserNameAdded,
           taskName,
+          weather,
+          quote,
           dispatch,
         }}
       >
