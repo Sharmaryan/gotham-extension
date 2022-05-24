@@ -1,12 +1,13 @@
 import React,{useEffect} from "react";
 import axios from "axios";
 import { useApp } from "../context/app-context";
+
 export const Weather = () => {
   const {
     weather,city, dispatch
   } = useApp();
     useEffect(() => {
-      (async () => {
+      (async () => { 
         const response = await axios.get(
           `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&aqi=no`
         );
