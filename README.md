@@ -1,70 +1,41 @@
 # Getting Started with Create React App
+This is a momentum extension clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
 
-## Available Scripts
+- User can enter name/city
+- User will get weather info according to the city
+- User can add main task and it be persistent in the app
+- User can edit/delete/update task
+- User can tick the task that is completed
 
-In the project directory, you can run:
+## Feature in the next version
 
-### `npm start`
+- Todo List with CRUD operation with persistent data
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Screenshots
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Screenshot (123)](https://user-images.githubusercontent.com/72251324/170032616-e7f06274-51fd-4366-bb7e-cb2f5f483101.png)
 
-### `npm run build`
+![Screenshot (124)](https://user-images.githubusercontent.com/72251324/170032634-ceff877a-426a-45d7-9f40-9784824c64e2.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Screenshot (125)](https://user-images.githubusercontent.com/72251324/170032645-7ee5d074-6a06-4aec-8ca4-b39e96f8c477.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Screenshot (126)](https://user-images.githubusercontent.com/72251324/170032654-fa2bf6d5-3f51-4431-85f1-b65a1c01c959.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Screenshot (127)](https://user-images.githubusercontent.com/72251324/170032667-f2c217b3-21cb-4fa1-b3f6-a082b4a10162.png)
 
-### `npm run eject`
+##Clone this repo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+``` git clone
+ https://github.com/Sharmaryan/gotham-extension.git
+ ```
+ 
+ ## Technology/Language Used
+ 
+ - React JS
+ - Tailwing CSS
+ 
+ 
