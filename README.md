@@ -27,7 +27,7 @@ This is a momentum extension clone
 
 ![Screenshot (127)](https://user-images.githubusercontent.com/72251324/170032667-f2c217b3-21cb-4fa1-b3f6-a082b4a10162.png)
 
-##Clone this repo
+## Clone this repo
 
 ``` git clone
  https://github.com/Sharmaryan/gotham-extension.git
