@@ -60,7 +60,7 @@ export const appReducer = (state, action) => {
         weather: {
           ...state.weather,
           temperature: action.payload.temp,
-          icon: action.payload.icon,
+        
         },
       };
     case "SET_QUOTE":

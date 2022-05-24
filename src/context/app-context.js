@@ -30,7 +30,7 @@ const AppProvider = ({ children }) => {
     city: "",
     isUserNameAdded: false,
     taskName: "",
-    weather: { temperature:'', icon:''},
+    weather: { temperature:''},
     quote:''
   });
 

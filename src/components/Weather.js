@@ -14,7 +14,7 @@ export const Weather = () => {
           type: "SET_WEATHER",
           payload: {
             temp: response.data.current.feelslike_c,
-            icon: response.data.current.condition.icon,
+            
           },
         });
       })();
@@ -24,7 +24,7 @@ export const Weather = () => {
       <div>
         {weather?.temperature}° <span className=" text-xl capitalize">{city}</span>
       </div>
-      <img src={weather?.icon} alt="weather" className="h3" />
+     
     </div>
   );
 };
